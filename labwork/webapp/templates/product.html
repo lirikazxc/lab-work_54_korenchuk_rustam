@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">{{ product.name }}</h1>
+    <div class="card">
+        <div class="card-body">
+            <img src="{{ product.image }}" alt="{{ product.name }}" style="width: 300px; height: auto; class="img-fluid">
+            <p class="card-text">{{ product.description }}</p>
+            <p class="card-text"><strong>Category:</strong> {{ product.category.name }}</p>
+            <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+            <p class="card-text">added: {{ product.created_at }}</p>
+
+        </div>
+    </div>
+    <div class="mt-4">
+        <a href="{% url 'product_edit_view' product.id %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'products_view' %}" class="btn btn-secondary">Back to products</a>
+    </div>
+{% endblock %}
