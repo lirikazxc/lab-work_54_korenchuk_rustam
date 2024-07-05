@@ -15,7 +15,8 @@
         </div>
     </div>
     <div class="mt-4">
-        <a href="{% url 'product_edit_view' product.id %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'product_edit_view' product.id %}" class="btn btn-primary">Edit</a>        
+        <a href="{% url 'delete_product' product.id%}" class="btn btn-danger">Delete</a>
         <a href="{% url 'products_view' %}" class="btn btn-secondary">Back to products</a>
     </div>
 {% endblock %}

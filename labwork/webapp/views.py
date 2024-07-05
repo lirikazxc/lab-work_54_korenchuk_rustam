@@ -73,3 +73,13 @@ def category_delete_view(request, id):
     category = get_object_or_404(Category, id=id)
     category.delete()
     return redirect("categories_view")
+
+
+def product_delete_view(request, id):
+    if request.method == "GET":
+        product = get_object_or_404(Product, id=id)
+        return render(request, "product_delete.html", {"product": product})
+    else:
+        product = get_object_or_404(Product, id=id)
+        product.delete()
+        return redirect("products_view")

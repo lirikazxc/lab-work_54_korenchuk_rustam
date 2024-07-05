@@ -1,0 +1,36 @@
+<form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ product.name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" required>{{ product.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select class="form-control" id="category" name="category" required>
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category.id == product.category.id %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" class="form-control" id="price" name="price" value="{{ product.price }}" required>
+        </div>
+        <div class="form-group">
+           <label for="image">Image url</label>
+            <input type="url" value="{{ product.image }}" id="image" name="image" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="{% if product %}
+{% url 'product_view' id=product.id %}
+{% else %}
+{% url "products_view" %}
+{% endif %}
+
+
+" class="btn btn-secondary">Cancel</a>
+    </form>

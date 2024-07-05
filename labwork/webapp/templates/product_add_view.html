@@ -7,34 +7,5 @@
     {% if error %}
         <div class="alert alert-danger">{{ error }}</div>
     {% endif %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" class="form-control" value="{% if product %}{{ product.name }}{% endif %}" required>
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" class="form-control">{% if product %}{{ product.description }}{% endif %}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="category">Category</label>
-            <select id="category" name="category" class="form-control" required>
-                <option value="" disabled selected>Select a category</option>
-                {% for category in categories %}
-                <option value="{{ category.id }}" {% if product and product.category.id == category.id %}selected{% endif %}>{{ category.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="price">Price</label>
-            <input type="number" id="price" name="price" class="form-control" step="0.01" value="{% if product %}{{ product.price }}{% endif %}" required>
-        </div>
-        <div class="form-group">
-            <label for="image">Image url</label>
-            <input type="url" id="image" name="image" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-    </form>
-    <a href="{% url 'products_view' %}" class="btn btn-secondary mt-3">Back to products</a>
+        {% include "partial/product_form.html" %}
 {% endblock %}
