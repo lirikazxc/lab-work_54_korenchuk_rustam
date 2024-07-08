@@ -1,12 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from webapp.models.category_model import Category
 from webapp.models.product_model import Product
+from .forms import ProductSearchForm
 
 
 def products_view(request):
-    products = Product.objects.filter(stock__gt=0).order_by('category', 'name')
-    return render(request, "products.html", {"products": products})
-
+    query = request.GET.get('query', '')
+    if query:
+        products = Product.objects.filter(name__icontains=query, stock__gt=0).order_by('category', 'name')
+    else:
+        products = Product.objects.filter(stock__gt=0).order_by('category', 'name')
+    form = ProductSearchForm()
+    return render(request, "products.html", {"products": products, "form": form, "query": query})
 
 
 def product_view(request, id):
