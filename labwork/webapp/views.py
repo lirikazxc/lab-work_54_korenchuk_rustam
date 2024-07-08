@@ -4,8 +4,9 @@ from webapp.models.product_model import Product
 
 
 def products_view(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(stock__gt=0).order_by('category', 'name')
     return render(request, "products.html", {"products": products})
+
 
 
 def product_view(request, id):
