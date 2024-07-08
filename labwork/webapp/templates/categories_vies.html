@@ -10,6 +10,7 @@
             <a href="{% url 'category_edit_view' category.id %}" class="text-dark">{{ category.name }}</a>
             <div>
                 <a href="{% url 'category_edit_view' category.id %}" class="btn btn-primary btn-sm mr-2">Edit</a>
+                <a href="{% url 'category_products' category.name %}" class="btn btn-info btn-sm mr-2">View Products</a>
                 <form action="{% url 'category_delete_view' id=category.id %}" method="post" class="d-inline">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>

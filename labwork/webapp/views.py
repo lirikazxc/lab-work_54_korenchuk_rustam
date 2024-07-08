@@ -89,3 +89,10 @@ def product_delete_view(request, id):
         product = get_object_or_404(Product, id=id)
         product.delete()
         return redirect("products_view")
+
+
+def category_products_view(request, category_name):
+    category = get_object_or_404(Category, name=category_name)
+    products = Product.objects.filter(category=category, stock__gt=0).order_by('name')
+    return render(request, "category_products.html", {"category": category, "products": products})
+

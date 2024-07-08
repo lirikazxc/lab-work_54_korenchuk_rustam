@@ -1,22 +1,16 @@
 {% extends 'base.html' %}
-{% block title %}Products{% endblock %}
+{% block title %}{{ category.name }} products{% endblock %}
 
 {% block content %}
-    <h1 class="mb-4">Products</h1>
     
+    <h1 class="mb-4">{{ category.name }} products</h1>
     
-    <form method="get" action="{% url 'products_view' %}" class="mb-4">
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Search</button>
-    </form>
-    
-    
-            <div class="list-group">
-            <div class="container text-center">
-            <div class="row">
+        <div class="list-group">
+        <div class="container text-center">
+        <div class="row">
+        
                 {% for product in products %}
-                    
-                   <div class="card mx-4 mb-4" style="width: 20rem;">
+                    <div class="card mx-4 mb-4" style="width: 20rem;">
                         <div class="card-body">
                             
                             <a href="{% url 'product_view' product.id %}" class="text-primary list-group-item-action">
